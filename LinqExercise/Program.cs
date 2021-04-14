@@ -24,20 +24,44 @@ namespace LinqExercise
              */
 
             //Print the Sum and Average of numbers
-
+            var avg = numbers.Average();
+            var sum = numbers.Sum();
+            Console.WriteLine($"Sum: {sum}\nAvg: {avg}");
             //Order numbers in ascending order and decsending order. Print each to console.
-
+            var a = numbers.OrderBy(x => x);
+            var d = numbers.OrderByDescending(x => x);
+            Console.WriteLine();
+            foreach(int num in a)
+                Console.WriteLine(num);
+            Console.WriteLine();
+            foreach (int num in d)
+                Console.WriteLine(num);
             //Print to the console only the numbers greater than 6
-
+            var greaterThanSix = numbers.Where(x => x > 6);
+            Console.WriteLine();
+            foreach (int num in greaterThanSix)
+                Console.WriteLine(num);
             //Order numbers in any order (acsending or desc) but only print 4 of them **foreach loop only!**
-
+            var highestFour = a.Take(4);
+            Console.WriteLine();
+            foreach (int num in highestFour)
+                Console.WriteLine(num);
             //Change the value at index 4 to your age, then print the numbers in decsending order
+            var lastOne = d.Select((x, i) => i==4 ? 54 : x);
+            Console.WriteLine();
+            foreach(int num in lastOne)
+                Console.WriteLine(num);
+            Console.WriteLine("\n");
 
             // List of employees ***Do not remove this***
             var employees = CreateEmployees();
 
             //Print all the employees' FullName properties to the console only if their FirstName starts with a C OR an S.
             //Order this in acesnding order by FirstName.
+            var taskOne = employees.Where(x => x.FirstName[0] == 'C' ||
+                                          x.FirstName[0] == 'S').OrderBy(x => x.FirstName);
+            foreach(Employee person in taskOne)
+                Console.WriteLine(person.FullName);
 
             //Print all the employees' FullName and Age who are over the age 26 to the console.
             //Order this by Age first and then by FirstName in the same result.
