@@ -51,7 +51,7 @@ namespace LinqExercise
             Console.WriteLine();
             foreach(int num in lastOne)
                 Console.WriteLine(num);
-            Console.WriteLine("\n");
+            Console.WriteLine("\n-------------------------------------------");
 
             // List of employees ***Do not remove this***
             var employees = CreateEmployees();
@@ -65,13 +65,24 @@ namespace LinqExercise
 
             //Print all the employees' FullName and Age who are over the age 26 to the console.
             //Order this by Age first and then by FirstName in the same result.
-
+            Console.WriteLine("-----------------------------------------");
+            var taskTwo = employees.Where(x => x.Age > 26).OrderBy(x => x.Age).ThenBy(x => x.FirstName);
+            foreach (Employee person in taskTwo)
+                Console.WriteLine($"{person.FullName}\nAge: {person.Age}\n");
             //Print the Sum and then the Average of the employees' YearsOfExperience
             //if their YOE is less than or equal to 10 AND Age is greater than 35
-
+            Console.WriteLine("\n-----------------------------------------");
+            var taskThree = employees.Where(x => x.YearsOfExperience < 11 && x.Age > 35);
+            var sYOE = taskThree.Sum(x => x.YearsOfExperience);
+            var aYOE = taskThree.Average(x => x.YearsOfExperience);
+            Console.WriteLine($"Years of Experience < 10" +
+                              $" and Age is greater than 35\n" +
+                              $"Sum YOE: {sYOE}\nAvg YOE: {aYOE}");
             //Add an employee to the end of the list without using employees.Add()
-
-            
+            Console.WriteLine("\n-----------------------------------------");
+            var newEmployeesList = employees.Append(new Employee("Jeff", "Baker", 54, 0));
+            foreach (Employee person in newEmployeesList)
+                Console.WriteLine(person.FullName);
             Console.WriteLine();
 
             Console.ReadLine();
